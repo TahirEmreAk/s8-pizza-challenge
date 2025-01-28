@@ -1,16 +1,13 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 
-const Home = () => {
+export default function Home() {
+    const navigate = useNavigate();
     return (
-        <div className="home-container">
-            <h1>En Lezzetli Pizzalar Burada!</h1>
-            <p>Hemen sipariş ver, sıcak ve taze pizzanın keyfini çıkar.</p>
-            <Link to="/order">
-                <button className="order-button">Sipariş Ver</button>
-            </Link>
+        <div className="home">
+            <h1>Teknolojik Yemekler</h1>
+            <h2>Kod acıktırır, pizza doyurur</h2>
+            <button onClick={() => navigate("/order")} className="order-button">Acıktım</button>
         </div>
     );
-};
-
-export default Home;
+}

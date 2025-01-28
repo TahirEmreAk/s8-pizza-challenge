@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./PizzaForm.css";
+import "./OrderPizza.css";
 import axios from "axios";
-
+import { useNavigate } from 'react-router-dom';
 
 const initialValues = {
     name: "",
@@ -12,7 +12,8 @@ const initialValues = {
     quantity: 1,
 }
 
-const PizzaForm = () => {
+const OrderPizza = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState(initialValues);
 
     const toppingsList = [
@@ -52,11 +53,16 @@ const PizzaForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!formData.size || !formData.dough) {
+            alert("Lütfen pizza boyutunu ve hamur tipini seçin.");
+            return;
+        }
         alert("Sipariş verildi!");
         console.log(formData);
         axios.post("https://reqres.in/api/pizza", formData).then(response => {
             console.log(response);
-            setFormData(initialValues)
+            setFormData(initialValues);
+            navigate("/success");
         }).catch(error => { console.warn(error) })
     };
 
@@ -76,15 +82,15 @@ const PizzaForm = () => {
                     <h3>Boyut Seç *</h3>
                     <div className="size-options">
                         <label>
-                            <input type="radio" name="size" value="Küçük" onChange={handleChange} />
+                            <input type="radio" name="size" value="Küçük" checked={formData.size === "Küçük"} onChange={handleChange} />
                             Küçük
                         </label>
                         <label>
-                            <input type="radio" name="size" value="Orta" onChange={handleChange} />
+                            <input type="radio" name="size" value="Orta" checked={formData.size === "Orta"} onChange={handleChange} />
                             Orta
                         </label>
                         <label>
-                            <input type="radio" name="size" value="Büyük" onChange={handleChange} />
+                            <input type="radio" name="size" value="Büyük" checked={formData.size === "Büyük"} onChange={handleChange} />
                             Büyük
                         </label>
                     </div></div>
@@ -108,6 +114,7 @@ const PizzaForm = () => {
                             <input
                                 type="checkbox"
                                 value={topping}
+                                checked={formData.toppings.includes(topping)}
                                 onChange={handleToppingChange}
                                 disabled={formData.toppings.length >= 10 && !formData.toppings.includes(topping)}
                             />
@@ -147,11 +154,11 @@ const PizzaForm = () => {
                 </div>
             </div>
 
-            <button type="submit" className="submit-button">
+            <button onClick={() => navigate("/success")} type="submit" className="submit-button">
                 SİPARİŞ VER
             </button>
         </form>
     );
 };
 
-export default PizzaForm;
+export default OrderPizza;
