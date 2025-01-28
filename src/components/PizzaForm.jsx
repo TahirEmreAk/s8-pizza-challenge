@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import "./PizzaForm.css";
+import axios from "axios";
 
+
+const initialValues = {
+    name: "",
+    size: "",
+    dough: "",
+    toppings: [],
+    note: "",
+    quantity: 1,
+}
 
 const PizzaForm = () => {
-    const [formData, setFormData] = useState({
-        name: "",
-        size: "",
-        dough: "",
-        toppings: [],
-        note: "",
-        quantity: 1,
-    });
+    const [formData, setFormData] = useState(initialValues);
 
     const toppingsList = [
         "Pepperoni",
@@ -51,6 +54,10 @@ const PizzaForm = () => {
         e.preventDefault();
         alert("Sipariş verildi!");
         console.log(formData);
+        axios.post("https://reqres.in/api/pizza", formData).then(response => {
+            console.log(response);
+            setFormData(initialValues)
+        }).catch(error => { console.warn(error) })
     };
 
     const basePrice = 85.5;
