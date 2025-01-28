@@ -1,19 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import workintech from '/workintech.svg'
-import './App.css'
-import PizzaForm from './components/PizzaForm'
+import './App.css';
+import PizzaForm from './components/PizzaForm';
+import Home from './components/Home';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from "react";
 
 function App() {
-
-
   return (
-    <>
-      <div>
-        <PizzaForm />
-      </div>
-    </>
-  )
+    <Router>
+      <Switch>
+        <Route path="/" element={<Home />} />
+        <Route path="/order" element={<PizzaForm />} />
+      </Switch>
+    </Router>
+  );
 }
 
-export default App
+export default App;
