@@ -18,7 +18,27 @@
     margin-bottom: 20px;
 }
 
+.size-crust-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.size-container,
+.crust-container {
+    flex: 1;
+
+}
+
+.size-options {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 8px;
+}
+
 .form-section {
+    margin-top: 40px;
     margin-bottom: 20px;
 }
 
@@ -27,6 +47,8 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
 }
+
+
 
 textarea {
     width: 90%;
@@ -54,6 +76,10 @@ textarea {
 
 .total p {
     margin: 5px 0;
+}
+
+.total p:last-child {
+    color: red;
 }
 
 .submit-button {

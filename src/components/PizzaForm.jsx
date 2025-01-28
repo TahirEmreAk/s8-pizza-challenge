@@ -64,33 +64,34 @@ const PizzaForm = () => {
             <p className="description">
                 Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve çeşitli diğer malzemelerle kaplanmış bir lezzet şölenidir.
             </p>
+            <div className="form-row size-crust-container">
+                <div className="size-container">
+                    <h3>Boyut Seç *</h3>
+                    <div className="size-options">
+                        <label>
+                            <input type="radio" name="size" value="Küçük" onChange={handleChange} />
+                            Küçük
+                        </label>
+                        <label>
+                            <input type="radio" name="size" value="Orta" onChange={handleChange} />
+                            Orta
+                        </label>
+                        <label>
+                            <input type="radio" name="size" value="Büyük" onChange={handleChange} />
+                            Büyük
+                        </label>
+                    </div></div>
 
-            <div className="form-section">
-                <h3>Boyut Seç *</h3>
-                <label>
-                    <input type="radio" name="size" value="Küçük" onChange={handleChange} />
-                    Küçük
-                </label>
-                <label>
-                    <input type="radio" name="size" value="Orta" onChange={handleChange} />
-                    Orta
-                </label>
-                <label>
-                    <input type="radio" name="size" value="Büyük" onChange={handleChange} />
-                    Büyük
-                </label>
+                <div className="crust-container">
+                    <h3>Hamur Seç *</h3>
+                    <select name="dough" value={formData.dough} onChange={handleChange}>
+                        <option value="">Hamur Kalınlığı</option>
+                        <option value="İnce">İnce</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Kalın">Kalın</option>
+                    </select>
+                </div>
             </div>
-
-            <div className="form-section">
-                <h3>Hamur Seç *</h3>
-                <select name="dough" value={formData.dough} onChange={handleChange}>
-                    <option value="">Hamur Kalınlığı</option>
-                    <option value="İnce">İnce</option>
-                    <option value="Normal">Normal</option>
-                    <option value="Kalın">Kalın</option>
-                </select>
-            </div>
-
             <div className="form-section">
                 <h3>Ek Malzemeler</h3>
                 <p>En fazla 10 malzeme seçebilirsiniz. 5₺</p>
