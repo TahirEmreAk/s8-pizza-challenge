@@ -1,20 +1,30 @@
+import React from "react";
 import './App.css';
 import OrderPizza from './components/OrderPizza';
 import Home from './components/Home';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import React from "react";
 import Success from './components/Success';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" element={<Home />} />
-        <Route path="/order" element={<OrderPizza />} />
-        <Route path="/success" element={<Success />} />
-      </Switch>
-    </Router>
+    <>
+      <Route exact path="/" component={Home} />
+      <Route path="/order" component={OrderPizza} />
+      <Route path="/success" component={Success} />
+    </>
   );
 }
 
 export default App;
+
+
+//   return (
+//     <>
+//       <div>
+//         <OrderPizza />
+//       </div>
+//     </>
+//   )
+// }
+
+// export default App

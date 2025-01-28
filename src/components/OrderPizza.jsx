@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./OrderPizza.css";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const initialValues = {
     name: "",
@@ -13,8 +13,9 @@ const initialValues = {
 }
 
 const OrderPizza = () => {
-    const navigate = useNavigate();
+    const history = useHistory();
     const [formData, setFormData] = useState(initialValues);
+    const [isFormDisabled, setIsFormDisabled] = useState(false);
 
     const toppingsList = [
         "Pepperoni",
@@ -42,6 +43,7 @@ const OrderPizza = () => {
         const updatedToppings = checked
             ? [...formData.toppings, value]
             : formData.toppings.filter((t) => t !== value);
+        // @ts-ignore
         setFormData({ ...formData, toppings: updatedToppings });
     };
 
@@ -53,18 +55,54 @@ const OrderPizza = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        let message = ""
         if (!formData.size || !formData.dough) {
-            alert("Lütfen pizza boyutunu ve hamur tipini seçin.");
-            return;
+            message += "Lütfen pizza boyutunu ve hamur tipini seçin."
         }
+        if (formData.toppings.length < 4 || formData.toppings.length > 10) {
+            message += "\nEn az 4, en fazla 10 malzeme seçebilirsiniz."
+        }
+
+        if (formData.name.length < 3) {
+            message += "\nİsim, en az 3 karakterden oluşmalıdır."
+        }
+
+        if (message.length != 0) {
+            alert(message)
+            return
+        }
+
+
+        setIsFormDisabled(true);
+
         alert("Sipariş verildi!");
         console.log(formData);
+
         axios.post("https://reqres.in/api/pizza", formData).then(response => {
             console.log(response);
             setFormData(initialValues);
-            navigate("/success");
-        }).catch(error => { console.warn(error) })
+            history.push("/success");
+        }).catch(error => { console.warn(error) }).finally(() => {
+            setIsFormDisabled(false);
+        });
     };
+
+    useEffect(() => {
+        let isValid = true
+        if (!formData.size || !formData.dough) {
+            isValid = false
+        }
+        if (formData.toppings.length < 4 || formData.toppings.length > 10) {
+            isValid = false
+        }
+
+        if (formData.name.length < 3) {
+            isValid = false
+        }
+
+        setIsFormDisabled(!isValid);
+    }, [formData])
+
 
     const basePrice = 85.5;
     const toppingsPrice = formData.toppings.length * 5;
@@ -114,8 +152,10 @@ const OrderPizza = () => {
                             <input
                                 type="checkbox"
                                 value={topping}
+                                // @ts-ignore
                                 checked={formData.toppings.includes(topping)}
                                 onChange={handleToppingChange}
+                                // @ts-ignore
                                 disabled={formData.toppings.length >= 10 && !formData.toppings.includes(topping)}
                             />
                             {topping}
@@ -125,12 +165,25 @@ const OrderPizza = () => {
             </div>
 
             <div className="form-section">
+                <h3>Sipariş İsmi</h3>
+                <input
+                    type="text"
+                    name="isim"
+                    onChange={handleChange}
+                    placeholder="Siparişinizin ismi nedir?"
+                    data-cy="isim"
+                    minLength={3}
+                />
+            </div>
+
+            <div className="form-section">
                 <h3>Sipariş Notu</h3>
                 <textarea
                     name="note"
                     value={formData.note}
                     onChange={handleChange}
                     placeholder="Siparişine eklemek istediğin bir not var mı?"
+                    disabled={isFormDisabled}
                 />
             </div>
 
@@ -154,7 +207,7 @@ const OrderPizza = () => {
                 </div>
             </div>
 
-            <button onClick={() => navigate("/success")} type="submit" className="submit-button">
+            <button type="submit" className="submit-button">
                 SİPARİŞ VER
             </button>
         </form>

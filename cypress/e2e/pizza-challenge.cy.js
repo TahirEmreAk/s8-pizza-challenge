@@ -1,5 +1,7 @@
-describe('template spec', () => {
-  it('passes', () => {
-    cy.visit('https://example.cypress.io')
+describe('OrderPizza', () => {
+  describe('Controls', () => {
+    it('Type Input', () => {
+      cy.visit('https://example.cypress.io')
+    })
   })
 })
