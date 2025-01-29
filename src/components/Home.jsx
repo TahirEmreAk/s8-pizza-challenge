@@ -14,7 +14,7 @@ export default function Home() {
 
             <div className="content">
                 <img src="./images/iteration-1-images/logo.svg" alt="Logo" className="logo" />
-                <h1 className="title">KOD AÇIKTIRIR</h1>
+                <h1 className="title">KOD ACIKTIRIR</h1>
                 <h2 className="subtitle">PİZZA, DOYURUR</h2>
                 <button onClick={() => history.push("/order")} className="cta-button">
                     ACIKTIM

@@ -111,111 +111,117 @@ const OrderPizza = ({ setOrderData }) => {
     const totalPrice = (basePrice + toppingsPrice) * formData.quantity;
 
     return (
-        <form onSubmit={handleSubmit} className="pizza-form">
-            <h2>Position Absolute Acı Pizza</h2>
-            <p className="price">85.50₺</p>
-            <p className="description">
-                Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve çeşitli diğer malzemelerle kaplanmış bir lezzet şölenidir.
-            </p>
-            <div className="form-row size-crust-container">
-                <div className="size-container">
-                    <h3>Boyut Seç *</h3>
-                    <div className="size-options">
-                        <label>
-                            <input type="radio" name="size" value="Küçük" checked={formData.size === "Küçük"} onChange={handleChange} data-cy="kucuk-size" />
-                            Küçük
-                        </label>
-                        <label>
-                            <input type="radio" name="size" value="Orta" checked={formData.size === "Orta"} onChange={handleChange} data-cy="orta-size" />
-                            Orta
-                        </label>
-                        <label>
-                            <input type="radio" name="size" value="Büyük" checked={formData.size === "Büyük"} onChange={handleChange} data-cy="buyuk-size" />
-                            Büyük
-                        </label>
-                    </div></div>
+        <>
+            <header className="header">
+                <img src="./images/iteration-1-images/logo.svg" alt="Logo" className="logo" />
+                <p className="siparis">Anasayfa - Sipariş Oluştur</p>
+            </header>
+            <form onSubmit={handleSubmit} className="pizza-form">
 
-                <div className="crust-container">
-                    <h3>Hamur Seç *</h3>
-                    <select name="dough" value={formData.dough} onChange={handleChange} data-cy="dough-choice">
-                        <option value="">Hamur Kalınlığı</option>
-                        <option value="İnce">İnce</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Kalın">Kalın</option>
-                    </select>
+                <h2>Position Absolute Acı Pizza</h2>
+                <p className="price">85.50₺</p>
+                <p className="description">
+                    Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve çeşitli diğer malzemelerle kaplanmış bir lezzet şölenidir.
+                </p>
+                <div className="form-row size-crust-container">
+                    <div className="size-container">
+                        <h3>Boyut Seç *</h3>
+                        <div className="size-options">
+                            <label>
+                                <input type="radio" name="size" value="Küçük" checked={formData.size === "Küçük"} onChange={handleChange} data-cy="kucuk-size" />
+                                Küçük
+                            </label>
+                            <label>
+                                <input type="radio" name="size" value="Orta" checked={formData.size === "Orta"} onChange={handleChange} data-cy="orta-size" />
+                                Orta
+                            </label>
+                            <label>
+                                <input type="radio" name="size" value="Büyük" checked={formData.size === "Büyük"} onChange={handleChange} data-cy="buyuk-size" />
+                                Büyük
+                            </label>
+                        </div></div>
+
+                    <div className="crust-container">
+                        <h3>Hamur Seç *</h3>
+                        <select name="dough" value={formData.dough} onChange={handleChange} data-cy="dough-choice">
+                            <option value="">Hamur Kalınlığı</option>
+                            <option value="İnce">İnce</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Kalın">Kalın</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div className="form-section">
-                <h3>Ek Malzemeler</h3>
-                <p>En fazla 10 malzeme seçebilirsiniz. 5₺</p>
-                <div className="toppings-grid">
-                    {toppingsList.map((topping, index) => (
-                        <label key={index}>
-                            <input
-                                type="checkbox"
-                                value={topping}
-                                // @ts-ignore
-                                checked={formData.toppings.includes(topping)}
-                                onChange={handleToppingChange}
-                                // @ts-ignore
-                                disabled={formData.toppings.length >= 10 && !formData.toppings.includes(topping)}
-                                data-cy="checkbox-input"
-                            />
-                            {topping}
-                        </label>
-                    ))}
+                <div className="form-section">
+                    <h3>Ek Malzemeler</h3>
+                    <p>En fazla 10 malzeme seçebilirsiniz. 5₺</p>
+                    <div className="toppings-grid">
+                        {toppingsList.map((topping, index) => (
+                            <label key={index}>
+                                <input
+                                    type="checkbox"
+                                    value={topping}
+                                    // @ts-ignore
+                                    checked={formData.toppings.includes(topping)}
+                                    onChange={handleToppingChange}
+                                    // @ts-ignore
+                                    disabled={formData.toppings.length >= 10 && !formData.toppings.includes(topping)}
+                                    data-cy="checkbox-input"
+                                />
+                                {topping}
+                            </label>
+                        ))}
+                    </div>
                 </div>
-            </div>
 
-            <div className="form-section">
-                <h3>Sipariş İsmi</h3>
-                <input
-                    type="text"
-                    name="name"
-                    onChange={handleChange}
-                    placeholder="Siparişinizin ismi nedir?"
-                    data-cy="name"
-                    minLength={3}
+                <div className="form-section">
+                    <h3>Sipariş İsmi</h3>
+                    <input
+                        type="text"
+                        name="name"
+                        onChange={handleChange}
+                        placeholder="Siparişinizin ismi nedir?"
+                        data-cy="name"
+                        minLength={3}
 
-                />
-            </div>
-
-            <div className="form-section">
-                <h3>Sipariş Notu</h3>
-                <textarea
-                    name="note"
-                    value={formData.note}
-                    onChange={handleChange}
-                    placeholder="Siparişine eklemek istediğin bir not var mı?"
-                    disabled={isFormDisabled}
-                />
-            </div>
-
-            <div className="order-summary">
-                <div className="quantity-control">
-                    <button type="button" onClick={() => handleQuantityChange(-1)}>
-                        -
-                    </button>
-                    <span>{formData.quantity}</span>
-                    <button type="button" onClick={() => handleQuantityChange(1)}>
-                        +
-                    </button>
+                    />
                 </div>
-                <div className="total">
-                    <p>
-                        <strong>Seçimler:</strong> {toppingsPrice.toFixed(2)}₺
-                    </p>
-                    <p>
-                        <strong>Toplam:</strong> {totalPrice.toFixed(2)}₺
-                    </p>
-                </div>
-            </div>
 
-            <button type="submit" className="submit-button" data-cy="submit-button">
-                SİPARİŞ VER
-            </button>
-        </form>
-    );
+                <div className="form-section">
+                    <h3>Sipariş Notu</h3>
+                    <textarea
+                        name="note"
+                        value={formData.note}
+                        onChange={handleChange}
+                        placeholder="Siparişine eklemek istediğin bir not var mı?"
+                        disabled={isFormDisabled}
+                    />
+                </div>
+
+                <div className="order-summary">
+                    <div className="quantity-control">
+                        <button type="button" onClick={() => handleQuantityChange(-1)}>
+                            -
+                        </button>
+                        <span>{formData.quantity}</span>
+                        <button type="button" onClick={() => handleQuantityChange(1)}>
+                            +
+                        </button>
+                    </div>
+                    <div className="total">
+                        <p>
+                            <strong>Seçimler:</strong> {toppingsPrice.toFixed(2)}₺
+                        </p>
+                        <p>
+                            <strong>Toplam:</strong> {totalPrice.toFixed(2)}₺
+                        </p>
+                    </div>
+                </div>
+
+                <button type="submit" className="submit-button" data-cy="submit-button">
+                    SİPARİŞ VER
+                </button>
+            </form>
+        </>);
 };
 
 export default OrderPizza;

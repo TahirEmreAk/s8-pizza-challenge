@@ -23,9 +23,9 @@ const Success = ({ orderData }) => {
 
     return (
         <div className="success-container">
-            <h1 className="success-title">Teknolojik Yemekler</h1>
+            <img src="./images/iteration-1-images/logo.svg" alt="Logo" className="logo" />
             <p className="success-subtitle">Lezzetin yolda</p>
-            <h2 className="success-message">SİPARİŞ ALINDI</h2>
+            <h2 className="success-message">SİPARİŞ ALINDI!</h2>
 
             <div className="order-summary">
                 <h3>{name}</h3>
@@ -34,15 +34,13 @@ const Success = ({ orderData }) => {
                 <p><strong>Ek Malzemeler:</strong> {toppings.length > 0 ? toppings.join(", ") : "Yok"}</p>
 
                 <div className="total-box">
+                    <h1>Sipariş Toplamı</h1>
                     <p><strong>Seçimler:</strong> {toppingsPrice.toFixed(2)}₺</p>
                     <p><strong>Toplam:</strong> {totalPrice.toFixed(2)}₺</p>
                 </div>
             </div>
 
-            <footer className="success-footer">
-                <h2>Teknolojik Yemekler</h2>
-                <p>341 Londonderry Road, Istanbul Türkiye</p>
-            </footer>
+
         </div>
     );
 };

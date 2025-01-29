@@ -1,0 +1,49 @@
+.footer {
+    background-color: #292929;
+    color: #fff;
+    padding: 50px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    flex: 1;
+}
+
+.footer-left h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    /* Flexbox kullanarak öğeleri yan yana diz */
+    flex-direction: column;
+    /* Öğeleri alt alta diz */
+    align-items: flex-start
+}
+
+.contact-info li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-center h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.footer-right {
+    text-align: right;
+}
