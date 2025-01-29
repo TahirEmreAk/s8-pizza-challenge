@@ -12,7 +12,7 @@ const initialValues = {
     quantity: 1,
 }
 
-const OrderPizza = () => {
+const OrderPizza = ({ setOrderData }) => {
     const history = useHistory();
     const [formData, setFormData] = useState(initialValues);
     const [isFormDisabled, setIsFormDisabled] = useState(false);
@@ -81,10 +81,8 @@ const OrderPizza = () => {
         axios.post("https://reqres.in/api/pizza", formData).then(response => {
             console.log(response);
             setFormData(initialValues);
-            history.push({
-                pathname: "/success",
-                state: formData
-            });
+            setOrderData(formData); // Prop Lifting: Veriyi yukarı (App.js) taşıyoruz
+            history.push("/success");
         }).catch(error => { console.warn(error) }).finally(() => {
             setIsFormDisabled(false);
         });

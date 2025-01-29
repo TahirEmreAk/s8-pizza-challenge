@@ -1,13 +1,25 @@
 import { useHistory } from "react-router-dom";
 import React from "react";
+import "./Home.css";
 
 export default function Home() {
     const history = useHistory();
+
     return (
-        <div className="home">
-            <h1>Teknolojik Yemekler</h1>
-            <h2>Kod acıktırır, pizza doyurur</h2>
-            <button onClick={() => history.push("/order")} className="order-button">Acıktım</button>
+        <div className="banner-container">
+            <div className="banner">
+                <img src="./images/iteration-1-images/home-banner.png" alt="Banner" className="banner-image" />
+                <div className="overlay"></div>
+            </div>
+
+            <div className="content">
+                <img src="./images/iteration-1-images/logo.svg" alt="Logo" className="logo" />
+                <h1 className="title">KOD AÇIKTIRIR</h1>
+                <h2 className="subtitle">PİZZA, DOYURUR</h2>
+                <button onClick={() => history.push("/order")} className="cta-button">
+                    ACIKTIM
+                </button>
+            </div>
         </div>
     );
 }

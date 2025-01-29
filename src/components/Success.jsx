@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import "./Success.css";
 
-const Success = () => {
+const Success = ({ orderData }) => {
     const location = useLocation();
     const history = useHistory();
-    const orderData = location.state;
+
 
     useEffect(() => {
         if (!orderData) {
