@@ -81,7 +81,10 @@ const OrderPizza = () => {
         axios.post("https://reqres.in/api/pizza", formData).then(response => {
             console.log(response);
             setFormData(initialValues);
-            history.push("/success");
+            history.push({
+                pathname: "/success",
+                state: formData
+            });
         }).catch(error => { console.warn(error) }).finally(() => {
             setIsFormDisabled(false);
         });
@@ -98,6 +101,7 @@ const OrderPizza = () => {
 
         if (formData.name.length < 3) {
             isValid = false
+
         }
 
         setIsFormDisabled(!isValid);
@@ -120,22 +124,22 @@ const OrderPizza = () => {
                     <h3>Boyut Seç *</h3>
                     <div className="size-options">
                         <label>
-                            <input type="radio" name="size" value="Küçük" checked={formData.size === "Küçük"} onChange={handleChange} />
+                            <input type="radio" name="size" value="Küçük" checked={formData.size === "Küçük"} onChange={handleChange} data-cy="kucuk-size" />
                             Küçük
                         </label>
                         <label>
-                            <input type="radio" name="size" value="Orta" checked={formData.size === "Orta"} onChange={handleChange} />
+                            <input type="radio" name="size" value="Orta" checked={formData.size === "Orta"} onChange={handleChange} data-cy="orta-size" />
                             Orta
                         </label>
                         <label>
-                            <input type="radio" name="size" value="Büyük" checked={formData.size === "Büyük"} onChange={handleChange} />
+                            <input type="radio" name="size" value="Büyük" checked={formData.size === "Büyük"} onChange={handleChange} data-cy="buyuk-size" />
                             Büyük
                         </label>
                     </div></div>
 
                 <div className="crust-container">
                     <h3>Hamur Seç *</h3>
-                    <select name="dough" value={formData.dough} onChange={handleChange}>
+                    <select name="dough" value={formData.dough} onChange={handleChange} data-cy="dough-choice">
                         <option value="">Hamur Kalınlığı</option>
                         <option value="İnce">İnce</option>
                         <option value="Normal">Normal</option>
@@ -157,6 +161,7 @@ const OrderPizza = () => {
                                 onChange={handleToppingChange}
                                 // @ts-ignore
                                 disabled={formData.toppings.length >= 10 && !formData.toppings.includes(topping)}
+                                data-cy="checkbox-input"
                             />
                             {topping}
                         </label>
@@ -168,11 +173,12 @@ const OrderPizza = () => {
                 <h3>Sipariş İsmi</h3>
                 <input
                     type="text"
-                    name="isim"
+                    name="name"
                     onChange={handleChange}
                     placeholder="Siparişinizin ismi nedir?"
-                    data-cy="isim"
+                    data-cy="name"
                     minLength={3}
+
                 />
             </div>
 
@@ -207,7 +213,7 @@ const OrderPizza = () => {
                 </div>
             </div>
 
-            <button type="submit" className="submit-button">
+            <button type="submit" className="submit-button" data-cy="submit-button">
                 SİPARİŞ VER
             </button>
         </form>
